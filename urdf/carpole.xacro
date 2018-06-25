@@ -10,22 +10,22 @@
 
   <link name="base_rail">
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 1.0" rpy="0 0 0"/>
       <geometry>
-        <box size="1.0 0.4 0.4"/>
+        <box size="1.0 0.04 0.04"/>
       </geometry>
     </collision>
 
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 1.0" rpy="0 0 0"/>
       <geometry>
-        <box size="1.0 0.4 0.4"/>
+        <box size="1.0 0.04 0.04"/>
       </geometry>
       <material name="orange"/>
     </visual>
 
     <inertial>
-      <origin xyz="0 0 1" rpy="0 0 0"/>
+      <origin xyz="0.5 0.02 0.02" rpy="0 0 0"/>
       <mass value="1"/>
       <inertia
         ixx="1.0" ixy="1.0" ixz="1.0"
