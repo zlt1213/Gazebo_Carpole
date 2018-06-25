@@ -5,7 +5,7 @@
 
   <joint name="fixed" type="fixed">
     <parent link="world"/>
-    <child link="link1"/>
+    <child link="base_rail"/>
   </joint>
 
   <link name="base_rail">
