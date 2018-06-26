@@ -73,9 +73,45 @@
   </joint>
 
 
+  <!-- pendu link -->
+  <link name="bar">
+    <collision>
+      <origin xyz="0.3 -0.005 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.6 0.01 0.01"/>
+      </geometry>
+    </collision>
 
+    <visual>
+      <origin xyz="0.3 -0.005 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.6 0.01 0.01"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
 
+    <inertial>
+      <origin xyz="0.6 -0.005 0.005" rpy="0 0 0"/>
+      <mass value="2.1"/>
+      <inertia
+        ixx="1.0" ixy="1.0" ixz="1.0"
+        iyy="1.0" iyz="1.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
 
+  <joint name="bar_car" type="continuous">
+    <parent link="car"/>
+    <child link="bar"/>
+    <origin xyz="0.0 -0.04 1.045" rpy="0 0 0"/>
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+    <limit effort="10.0" velocity="1005.0" />
+  </joint>
+
+  <!-- <joint name="bar_car" type="fixed">
+    <parent link="world"/>
+    <child link="bar"/>
+  </joint> -->
 
 
 
