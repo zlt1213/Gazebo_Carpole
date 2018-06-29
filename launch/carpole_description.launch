@@ -5,11 +5,19 @@
   <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find carpole)/urdf/carpole.xacro'" />
 
   <!-- Send fake joint values-->
-  <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
     <param name="use_gui" value="false"/>
-  </node> -->
+  </node>
 
   <!-- Send robot states to tf -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+
+  <!--Load the joint controllers to param server-->
+  <rosparam file="$(find carpole)/config/controller.yaml" command="load"/>
+
+  <!--Load controllers-->
+  <node name="spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/carpole" args="joint_state_controller
+    joint1_position_controller"/>
 
 </launch>
