@@ -25,5 +25,5 @@
   output="screen" args="-urdf -param robot_description -model carpole"/>
 
   <!--launch rviz-->
-  <node name="rviz" pkg="rviz" type="rviz" respawn="false"/>
+  <!-- <node name="rviz" pkg="rviz" type="rviz" respawn="false"/> -->
 </launch>

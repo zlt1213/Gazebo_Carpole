@@ -5,7 +5,12 @@ carpole:
     publish_rate: 50
 
   # Position Controllers ---------------------------------------
-  joint1_position_controller:
+  joint2_position_controller:
     type: effort_controllers/JointPositionController
+    joint: bar_car
+    pid: {p: 0.0, i: 0.0, d: 0.0}
+
+  joint1_effort_controller:
+    type: effort_controllers/JointEffortController
     joint: carsld
-    pid: {p: 200.0, i: 1, d: 80.0}
+    # pid: {p: 10.0, i: 0.0, d: 0.0}
