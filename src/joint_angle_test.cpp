@@ -20,9 +20,9 @@ float m_pole = 3.0;
 float l = 0.6;
 float g = 9.8;
 float e_target = m_pole * g * l;
-float k_e = 1.0;
-float k_p = 1.0;
-float k_d = 1.0;
+float k_e = 1.5;
+float k_p = 0.001;
+float k_d = 0.001;
 
 
 void chatterCallback(const sensor_msgs::JointState::ConstPtr& msg)
@@ -44,7 +44,7 @@ void chatterCallback(const sensor_msgs::JointState::ConstPtr& msg)
   joint_eff_pub.publish(msg_pub);
 
 
-  ROS_INFO("Energy[%f]", e_pendu);
+  ROS_INFO("eff[%f]", out_eff );
 
 
 }
