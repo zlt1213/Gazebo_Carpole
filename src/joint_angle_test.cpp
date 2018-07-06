@@ -16,27 +16,31 @@ sensor_msgs::JointState msg_eff_pub;
 
 // ==== define the paramters for the cart-pole problem
 float m_car = 1.0;
-float m_pole = 3.0;
-float l = 0.6;
+float m_pole = 2.0;
+float l = 0.61;
 float g = 9.8;
 float e_target = m_pole * g * l;
-float k_e = 1.5;
-float k_p = 0.001;
-float k_d = 0.001;
+float k_e = 5.0;
+float k_p = 5;
+float k_d = 5;
 
 
 void chatterCallback(const sensor_msgs::JointState::ConstPtr& msg)
 {
 
   // calculate the current energy of the pendulum
-  float pole_theta_d = 3.141 / 2.0-msg->velocity[0];
+  float pole_theta_d = -msg->velocity[0];
   float pole_theta = 3.141 / 2.0 -msg->position[0];
   float car_x = msg->position[1];
   float car_x_dot = msg->velocity[1];
 
 
-  float e_pendu = 1.0 / 2.0 * m_pole * l * l * pole_theta_d * pole_theta_d - m_pole * g * l * cos(pole_theta);
-  float e_diff = e_pendu - e_target;
+  // if energy shapping
+  // if(pole_theta)
+
+
+  // float e_pendu = 1.0 / 2.0 * m_pole * l * l * pole_theta_d * pole_theta_d - m_pole * g * l * cos(pole_theta);
+  float e_diff = 1.0 / 2.0 * m_pole * l * l * pole_theta_d * pole_theta_d - m_pole * g * l * cos(pole_theta) - e_target - 1.0;
   float out_eff = k_e * pole_theta_d * cos(pole_theta) * e_diff - k_p * car_x - k_d * car_x_dot;
 
 
@@ -44,7 +48,7 @@ void chatterCallback(const sensor_msgs::JointState::ConstPtr& msg)
   joint_eff_pub.publish(msg_pub);
 
 
-  ROS_INFO("eff[%f]", out_eff );
+  // ROS_INFO("eff[%f]", out_eff );
 
 
 }

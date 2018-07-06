@@ -2,7 +2,7 @@ carpole:
   # Publish all joint states -----------------------------------
   joint_state_controller:
     type: joint_state_controller/JointStateController
-    publish_rate: 50
+    publish_rate: 10000
 
   # Position Controllers ---------------------------------------
   joint2_position_controller:
