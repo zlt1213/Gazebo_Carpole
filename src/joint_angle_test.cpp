@@ -24,6 +24,10 @@ float k_e = 5.0;
 float k_p = 5;
 float k_d = 5;
 
+float ang_tolerance = 3.14 / 10.0;
+float ang_balance = 3.1415926 * 1.5;
+float ang_low_lim = ang_balance - ang_tolerance;
+float ang_high_lim = ang_balance + ang_tolerance;
 
 void chatterCallback(const sensor_msgs::JointState::ConstPtr& msg)
 {
@@ -36,19 +40,25 @@ void chatterCallback(const sensor_msgs::JointState::ConstPtr& msg)
 
 
   // if energy shapping
-  // if(pole_theta)
+  float true_angle = msg->position[0];
+  while(true_angle > 2*3.14159){
+    true_angle -= 2*3.14159;
+  }
+  while(true_angle < 0){
+    true_angle += 2.0 * 3.14159;
+  }
 
+  if( true_angle > ang_low_lim && true_angle < ang_high_lim){
+    // range of LQR
+    ROS_INFO("LQR");
+  }else{
+    // range of energy shaping
+    ROS_INFO("E-SHAPPING");
+    float e_diff = 1.0 / 2.0 * m_pole * l * l * pole_theta_d * pole_theta_d - m_pole * g * l * cos(pole_theta) - e_target - 1.0;
+    msg_pub.data = k_e * pole_theta_d * cos(pole_theta) * e_diff - k_p * car_x - k_d * car_x_dot;
+    joint_eff_pub.publish(msg_pub);
+  }
 
-  // float e_pendu = 1.0 / 2.0 * m_pole * l * l * pole_theta_d * pole_theta_d - m_pole * g * l * cos(pole_theta);
-  float e_diff = 1.0 / 2.0 * m_pole * l * l * pole_theta_d * pole_theta_d - m_pole * g * l * cos(pole_theta) - e_target - 1.0;
-  float out_eff = k_e * pole_theta_d * cos(pole_theta) * e_diff - k_p * car_x - k_d * car_x_dot;
-
-
-  msg_pub.data = out_eff;
-  joint_eff_pub.publish(msg_pub);
-
-
-  // ROS_INFO("eff[%f]", out_eff );
 
 
 }
