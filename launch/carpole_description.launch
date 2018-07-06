@@ -24,6 +24,7 @@
     joint1_effort_controller"/> -->
   <node name="spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" ns="/carpole" args="joint_state_controller
+    joint2_position_controller
     joint1_effort_controller"/>
 
 </launch>

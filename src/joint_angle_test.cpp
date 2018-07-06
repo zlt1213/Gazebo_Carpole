@@ -21,8 +21,8 @@ float l = 0.61;
 float g = 9.8;
 float e_target = m_pole * g * l;
 float k_e = 5.0;
-float k_p = 5;
-float k_d = 5;
+float k_p = 4;
+float k_d = 4;
 
 float ang_tolerance = 3.14 / 10.0;
 float ang_balance = 3.1415926 * 1.5;
@@ -54,7 +54,7 @@ void chatterCallback(const sensor_msgs::JointState::ConstPtr& msg)
   }else{
     // range of energy shaping
     ROS_INFO("E-SHAPPING");
-    float e_diff = 1.0 / 2.0 * m_pole * l * l * pole_theta_d * pole_theta_d - m_pole * g * l * cos(pole_theta) - e_target - 1.0;
+    float e_diff = 1.0 / 2.0 * m_pole * l * l * pole_theta_d * pole_theta_d - m_pole * g * l * cos(pole_theta) - e_target - 0.7;
     msg_pub.data = k_e * pole_theta_d * cos(pole_theta) * e_diff - k_p * car_x - k_d * car_x_dot;
     joint_eff_pub.publish(msg_pub);
   }

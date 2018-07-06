@@ -118,8 +118,8 @@
     <child link="car"/>
     <origin xyz="0 0 0.045" rpy="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <limit lower="-1.5"
-         upper="1.5"
+    <limit lower="-1.0"
+         upper="1.0"
          effort="100000.0"
          velocity="100005.0" />
     <dynamics damping="0.0" friction="0.0"/>
